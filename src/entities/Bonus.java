@@ -53,8 +53,8 @@ public class Bonus {
 
     public String getBonus2() {
         return bonus2;
-    }
-
+    } 
+    
     public void setBonus2(String bonus2) {
         this.bonus2 = bonus2;
     }

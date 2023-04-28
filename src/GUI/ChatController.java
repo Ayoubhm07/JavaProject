@@ -24,6 +24,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import services.Mail;
+
 
 /**
  * FXML Controller class
@@ -68,7 +70,7 @@ private static final String[] FORBIDDEN_WORDS = {"fuck", "shutup", "damn"};
     }    
 
     @FXML
-    private void UserA(ActionEvent event) {
+    private void UserA(ActionEvent event) throws Exception {
         String input = ASK.getText();
         String response = responses.getOrDefault(input, "désolé j'ai pas la réponse ");
         for (String forbiddenWord : FORBIDDEN_WORDS) {
@@ -79,6 +81,7 @@ private static final String[] FORBIDDEN_WORDS = {"fuck", "shutup", "damn"};
                 ASK.setDisable(true);
                  Alert alert = new Alert(AlertType.ERROR, "Vous avez été banni ");
                 alert.showAndWait();
+                Mail.sendMail("ayoub.hammoudi@esprit.tn", "https://buy.stripe.com/test_aEU166gaWcCj1S86op");
                 Platform.exit();
             } else {
                 Alert alert = new Alert(AlertType.WARNING, "Le message contient un gros mot. Attention!");

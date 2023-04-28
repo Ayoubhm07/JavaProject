@@ -61,55 +61,7 @@ public class AddBonusController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
-
-private void SendEmail() {
-
-     
-      // Recipient's email ID needs to be mentioned.
-      String to = "ayoub.hammoudi@esprit.tn";
-
-      // Sender's email ID needs to be mentioned
-      String from = "web@gmail.com";
-
-      // Assuming you are sending email from localhost
-      String host = "localhost";
-
-      // Get system properties
-      Properties properties = System.getProperties();
-
-      // Setup mail server
-      properties.setProperty("mail.smtp.host", host);
-
-      // Get the default Session object.
-      Session session = Session.getDefaultInstance(properties);
-
-      try {
-         // Create a default MimeMessage object.
-         MimeMessage message = new MimeMessage(session);
-
-         // Set From: header field of the header.
-         message.setFrom(new InternetAddress(from));
-
-         // Set To: header field of the header.
-         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
-         // Set Subject: header field
-         message.setSubject("FELICITATION!");
-
-         // Now set the actual message
-         message.setText("Merci pour votre achat!Profitez de votre Pack et ses Bonus extraordinaires!");
-
-         // Send message
-         Transport.send(message);
-          JOptionPane.showMessageDialog(null,"Sent message successfully....");       
-
-      } catch (MessagingException mex) {
-         mex.printStackTrace();
-      }
-   }
-
-    
+       
 
     @FXML
     private void OnAjouterClicked(ActionEvent event) {
@@ -124,13 +76,13 @@ else{
             b.setBonus2(tf2.getText());
             b.setBonus3(tf3.getText());
             b.setBonus4(tf4.getText());
-          /*  b.setP(p.id==id_packA);*/
+            b.setP(AddPackController.PackAjoute);
             sb.ajouter(b);
 Notifications.create()
         .title("Succès")
         .text("Bonus ajouté !Création Du Pack Terminé !")
         .showInformation();   
-SendEmail();
+
             try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Bonuss.fxml"));
             Parent root = loader.load();
@@ -142,15 +94,5 @@ SendEmail();
         }
     }
 
-    @FXML
-   private void OnHomeClicked(ActionEvent event) {
-         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("BackHome.fxml"));
-            Parent root = loader.load();
-            Home.getScene().setRoot(root);
-        } catch (IOException ex) {
-            Logger.getLogger(AddPackController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     
 }

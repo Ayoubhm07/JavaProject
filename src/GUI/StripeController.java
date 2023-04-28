@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import static GUI.PackDetailsController.choix;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
@@ -12,6 +13,13 @@ import com.stripe.net.RequestOptions;
 import com.stripe.param.CustomerCreateParams;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,14 +49,38 @@ public class StripeController implements Initializable {
     @FXML
     private Button Valider;
     @FXML
-    private ChoiceBox<?> Packs;
+    private ChoiceBox<String> Packs;
+    
+   
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        try {
+            List<String> packNames = new ArrayList<>();
+            
+//Récupération des noms des packs à partir de la base de données et ajout à la liste
+Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/wiiw", "root", "");
+Statement stmt = conn.createStatement();
+ResultSet rs = stmt.executeQuery("SELECT nom FROM pack");
+while (rs.next()) {
+    String packName = rs.getString("nom");
+    packNames.add(packName);
+}
+
+//Ajout des noms des packs au ChoiceBox
+Packs.getItems().addAll(packNames);
+
+
+
+//Ajout d'un ChangeListener au ChoiceBox pour détecter les changements de sélection
+
+// TODO
+        } catch (SQLException ex) {
+            Logger.getLogger(StripeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }    
 
     @FXML
@@ -97,8 +129,44 @@ public class StripeController implements Initializable {
 
     @FXML
     private void OnValiderClicked(ActionEvent event) throws Exception {
+//        Packs.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+//        choix = newValue;
+           
+         if(choix.equals("PackGold")){
+            try {
+                Mail.sendMail(adressField.getText(), "https://buy.stripe.com/test_dR6aGG1g2cCj2WcbII");
+            } catch (Exception ex) {
+                Logger.getLogger(StripeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+         else if(choix.equals("PackSilver")){
+            try {
+                Mail.sendMail(adressField.getText(), "https://buy.stripe.com/test_aEU166gaWcCj1S86op");
+                 System.out.println("mail envoyé");
+            } catch (Exception ex) {
+                Logger.getLogger(StripeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+}
+         else if(choix.equals("PackPlatinum")){
+            try {
+                Mail.sendMail(adressField.getText(), "https://buy.stripe.com/test_aEUcOO6AmgSz7csbIK");
+               
+            } catch (Exception ex) {
+                Logger.getLogger(StripeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+}
+         else    try {
+             Mail.sendMail(adressField.getText(), "https://buy.stripe.com/test_aEUcOO6AmgSz7csbIK");
+        } catch (Exception ex) {
+            Logger.getLogger(StripeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+// });
+                        
+
         StripePayement();
-        Mail.sendMail(adressField.getText(), "new stripe link");
+        
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Succes.fxml"));
             Parent root = loader.load();
@@ -106,6 +174,6 @@ public class StripeController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(AddPackController.class.getName()).log(Level.SEVERE, null, ex);
         } 
-    }
-        
+   }
+
 }

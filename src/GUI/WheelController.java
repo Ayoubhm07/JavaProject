@@ -5,12 +5,17 @@
  */
 package GUI;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
@@ -28,11 +33,9 @@ public class WheelController implements Initializable {
     @FXML
     private Button Start;
     @FXML
-    private Button Retour;
+    private ImageView Marker;
     @FXML
     private Button Home;
-    @FXML
-    private ImageView Marker;
     
     /**
      * Initializes the controller class.
@@ -139,6 +142,18 @@ public class WheelController implements Initializable {
         .title("Succès")
         .text("FELICITATION !PROFITEZ DE VOTRE BONUS")
         .showInformation(); 
+    }
+
+    @FXML
+    private void OnHomeClicked(ActionEvent event) {
+        
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("BackHome.fxml"));
+            Parent root = loader.load();
+            Home.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(AddPackController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     

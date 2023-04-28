@@ -62,6 +62,7 @@ public class PackDetailsController implements Initializable {
     private Button AcheterP;
     @FXML
     private Button AcheterS;
+    public static String choix;
 
     /**
      * Initializes the controller class.
@@ -77,6 +78,7 @@ public class PackDetailsController implements Initializable {
         labelPrix.setText(String.valueOf(p.getPrix()));
         labelDesc.setText(p.getDesc());
         imagePreview.setImage(new Image(new File(p.getImage().replace('/', '\\')).toURI().toString()));
+        choix=labelNom.getText();
     }
 
     @FXML
@@ -113,7 +115,7 @@ public class PackDetailsController implements Initializable {
             try {
                 Notifications.create()
         .title("Succès")
-        .text("Pack ajouté ! Vous Devez attribuer des Bonus à votre Pack !")
+        .text("Pack supprimé !")
         .showInformation(); 
                 ServicePack sp = new ServicePack();
                 sp.supprimer(Integer.parseInt(labelID.getText()));

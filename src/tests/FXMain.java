@@ -34,6 +34,8 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javax.media.Manager;
 import javax.media.MediaLocator;
 import javax.media.Player;
@@ -47,12 +49,12 @@ import javax.swing.JPanel;
  */
 public class FXMain extends Application {
     
-    
+    public Player player;
 
 public class VideoPlayer extends JFrame {
-     private Player player;
+     
     
-    public VideoPlayer(String mediaURL) {
+    public VideoPlayer(URL mediaURL) {
         
         super("BANEKTI");
         setSize(1000, 800);
@@ -63,22 +65,30 @@ public class VideoPlayer extends JFrame {
         add(videoPanel, BorderLayout.CENTER);
         
         try {
-            URL url = new URL(mediaURL);
-            MediaLocator locator = new MediaLocator(url);
-            player = Manager.createRealizedPlayer(locator);
+//            URL url = new URL(mediaURL);
+//            MediaLocator locator = new MediaLocator(url);
+//            player = Manager.createRealizedPlayer(locator);
             Component video = player.getVisualComponent();
             videoPanel.add(video);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-}
+
+public void startVideoPlayer() {
+            player.start();
+        }
+    }
     
     @Override
     public void start(Stage primaryStage) throws IOException {
-        
-        
-      player.start();
+//       Path path = Paths.get("C:\\xampp\\htdocs\\Gestion_Pack\\src\\Media\\ayoub.mp4");
+//       URL url = path.toUri().toURL();
+//       VideoPlayer player = new VideoPlayer(url); 
+//       player.setVisible(true);
+//       player.startVideoPlayer();
+//       player.setVisible(false);
+
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/BackHome.fxml"));
         
                   Parent root = loader.load();
@@ -96,9 +106,6 @@ public class VideoPlayer extends JFrame {
      */
     public static void main(String[] args) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         
-        VideoPlayer player = new VideoPlayer("file:/chemin/vers/votre/video.mp4");
-        player.setVisible(true);
-        player.start();
         String clipPath;
         clipPath = "C:\\Users\\HP\\Desktop\\ss.wav";
         AudioInputStream audio = AudioSystem.getAudioInputStream(new File(clipPath));

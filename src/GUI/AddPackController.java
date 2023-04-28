@@ -61,6 +61,8 @@ public class AddPackController implements Initializable {
     
      private ServicePack sp = new ServicePack();
      private Pack p = new Pack();
+     
+     public static Pack PackAjoute;
     
 
     /**
@@ -113,11 +115,17 @@ public class AddPackController implements Initializable {
     @FXML
     private void onAjouterClicked(ActionEvent event) {
             if (verif()) {
-            p.setPrix(Integer.parseInt(tfPrix.getText()));
+                   
+            p.setPrix(Integer.parseInt(tfPrix.getText()));            
             p.setDesc(tfDesc.getText());
             p.setNom(tfNom.getText());
             p.setImage(p.getImage().replace('/', '\\'));
             sp.ajouter(p);
+            
+            
+            
+          
+          
             
         Notifications.create()
         .title("Succès")

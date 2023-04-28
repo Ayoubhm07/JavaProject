@@ -134,7 +134,11 @@ public class BackHomeController implements Initializable {
     }
 
     @FXML
-    private void CLICKED(ActionEvent event) {
+    private void OnVideoClicked(ActionEvent event) throws IOException {
+        
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("video.fxml"));
+        Parent root = loader.load();
+        goPacks.getScene().setRoot(root); 
     }
 
 

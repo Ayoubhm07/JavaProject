@@ -18,5 +18,6 @@
             <Image url="@../images/marker.png" />
          </image>
       </ImageView>
+      <Button fx:id="Home" layoutX="422.0" layoutY="716.0" mnemonicParsing="false" onAction="#OnHomeClicked" prefHeight="31.0" prefWidth="92.0" text="Home" />
    </children>
 </AnchorPane>

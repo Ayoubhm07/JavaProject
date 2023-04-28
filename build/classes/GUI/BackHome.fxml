@@ -47,6 +47,6 @@
       </ImageView>
       <ToggleButton fx:id="Tbutton" layoutX="477.0" layoutY="715.0" mnemonicParsing="false" onAction="#OnSR" prefHeight="31.0" prefWidth="105.0" stylesheets="@ayoub.css" text="CHATBOT" />
       <ToggleButton fx:id="Tbutton1" layoutX="477.0" layoutY="715.0" mnemonicParsing="false" onAction="#OnCommencer" prefHeight="31.0" prefWidth="105.0" stylesheets="@ayoub.css" text="PACKS" />
-      <Button fx:id="video" layoutX="107.0" layoutY="73.0" mnemonicParsing="false" onAction="#CLICKED" text="video" />
+      <Button fx:id="video" layoutX="58.0" layoutY="40.0" mnemonicParsing="false" onAction="#OnVideoClicked" text="VIDEO" />
    </children>
 </AnchorPane>

@@ -76,6 +76,7 @@ public class BonussController implements Initializable {
       private void AfficherBonuss() throws SQLException, IOException {
             ServiceBonus bs = new ServiceBonus();
             List<Bonus> lb = bs.getAll();
+            
          
         Colnom_b1.setCellValueFactory(new PropertyValueFactory<Bonus, String>("bonus1"));
      
@@ -85,7 +86,7 @@ public class BonussController implements Initializable {
 
         Colnom_b4.setCellValueFactory(new PropertyValueFactory<Bonus, String>("bonus4"));
         
-        Colid_pack.setCellValueFactory(new PropertyValueFactory<Bonus, Integer>("p.getId()"));
+        Colid_pack.setCellValueFactory(new PropertyValueFactory<Bonus, Integer>("p"));
 
         
         //Colid_pack.setCellValueFactory(new PropertyValueFactory<Bonus, Integer>("p"));
